@@ -37,22 +37,19 @@ hist(bydate$steps, main = 'Total number of steps per day', xlab = '# of steps')
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png) 
 
 ```r
-summarize <- summary(bydate$steps)
-summarize["Mean"]
+mean(bydate$steps)
 ```
 
 ```
-##  Mean 
-## 10770
+## [1] 10766.19
 ```
 
 ```r
-summarize["Median"]
+median(bydate$steps)
 ```
 
 ```
-## Median 
-##  10760
+## [1] 10765
 ```
 
 
@@ -91,6 +88,7 @@ byinterval[maxintervalindex,]
 Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
 
 * prior inspection of the data showed NA's only in the steps column
+* also can confirm with complete.cases()
 
 Strategy for filling in all of the missing steps values in the dataset
 
@@ -116,6 +114,14 @@ sum( is.na(data$steps) )
 ```
 
 ```r
+sum(!complete.cases(data))
+```
+
+```
+## [1] 2304
+```
+
+```r
 imputed <- data
 for (i in 1:nrow(imputed)) { # iterate over every row of the copied dataset
     if ( is.na(imputed[i,]$steps) ) { # if the number of steps for that row is NA...
@@ -131,22 +137,19 @@ hist(bydate$steps, main = 'Total number of steps per day, Imputed dataset', xlab
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
 
 ```r
-summarize <- summary(bydate$steps)
-summarize["Mean"]
+mean(bydate$steps)
 ```
 
 ```
-##  Mean 
-## 10770
+## [1] 10766.19
 ```
 
 ```r
-summarize["Median"]
+median(bydate$steps)
 ```
 
 ```
-## Median 
-##  10770
+## [1] 10766.19
 ```
 
 
